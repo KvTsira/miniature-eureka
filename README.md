@@ -1,7 +1,16 @@
-# Note Taker Starter Code
+# Note Taker
+
+The application allows users to write and save notes. 
+
+# Build with:
+* HTML
+* CSS
+* JavaScript
+* Express.js
+* UUID
 
 
-# user Stiry
+# User Story
 * AS A small business owner
 * I WANT to be able to write and save notes
 * SO THAT I can organize my thoughts and keep track of tasks I need to complete

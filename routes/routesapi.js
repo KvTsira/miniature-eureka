@@ -13,7 +13,7 @@ router.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "../public", "notes.html"));
 });
 
-// GET al notes using wild card
+// GET all notes using wild card
 router.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../public", "index.html"));
 });

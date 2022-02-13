@@ -1,9 +1,10 @@
+//dependencies
 const path = require('path');
 const fs = require('fs');
 
 
+//check for title and the body of the note
 const validateNoteType = newNote => {
-    //check for title and the body of the tore
     if (!newNote.title || typeof newNote.title !== 'string') {
         return false;
     }
@@ -13,10 +14,11 @@ const validateNoteType = newNote => {
     return true;
     };
 
+//push a note to notes collection
 const addNewNote = (newNote, notes) => {
     notes.push(newNote);
     fs.writeFileSync(
-        path.join(__dirname, '../db/notes.json'),
+        path.join(__dirname, '../db/db.json'),
         JSON.stringify({notes}, null, 2)
     );
     return notes;

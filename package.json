@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/KvTsira/miniature-eureka#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "uud": "^0.0.0",
+    "uuid": "^8.3.2"
   }
 }

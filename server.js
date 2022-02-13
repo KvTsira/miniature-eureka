@@ -1,11 +1,22 @@
 //dependencies
 const express = require("express");
-const fs = require("fs");
+const path = require("path");
 
-//assign express to an app variable
+//setting up servers
 const app = express();
+const PORT = process.env.PORT || 3001;
+
+const routesAPI = require("./routes/routesapi");
+const routesHTML = require("./routes/routeshtml");
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join (__dirname, "public")));
+
+app.use("/api", routesAPI);
+app.use("/", routesHTML);
 
 
-app.listen(3001, () => {
-    console.log(`API server now on port 3001!`);
-  });
+app.listen(PORT, () => { 
+    console.log(`App listening on: ${PORT}`);
+});

@@ -2,40 +2,44 @@
 const express = require("express");
 const fs = require("fs");
 let { notes }  = require("./db/db.json");
-//let { notes } = require("../db/db.json");
 const path = require("path");
-const uud = require("uuid");
-const { DH_CHECK_P_NOT_SAFE_PRIME } = require("constants");
-const exp = require("constants");
+const uuid = require("uuid");
+const { validateNoteType, addNewNote } = require("./library/validate");
 
 //setting up servers
 const app=express();
 var PORT = process.env.PORT || 3001;
 
-//Middleware
+//Static Middleware
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
 
 //settings routes for APIs
-//get notes 
+//get request 
 app.get("/api/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "/db/db.json"))
 });
 
-//post notes
+//post request
 app.post("/api/notes", (req, res) => {
-    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
-    const newNote = req.body;
-    newNote.id = 1; //uuid.v4();
-    notes.push(newNote);
-    fs.writeFileSync("./db/db/json", JSON.stringify(notes));
-    res.json(notes);
+    const newNote = {
+        id: uuid.v4(),
+        //id: notes.length + 1,
+        title: req.body.title,
+        text: req.body.text
+      } // Checks if blank 
+      if(!validateNoteType(newNote)) {
+        return res.status(400).send("The title and the body are required to add a note!");
+      } else { // add note
+        addNewNote(newNote, notes);
+        res.json(notes);
+      }
 });
 
-//delete a note
+//delete request
 app.delete("/api/notes/:id", (req, res) => {
-    const notes = JSOB.parse(fs.readFileSync("./db/db.json"));
+    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
     const newNotes = notes.filter((removeNote) => removeNote.id !== req.params.id);
     fs.writeFileSync("./db/db/json", JSON.stringify(newNotes));
     res.json(newNotes);

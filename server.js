@@ -18,7 +18,7 @@ app.use(express.static("public"));
 //settings routes for APIs
 //get request 
 app.get("/api/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "/db/db.json"))
+    res.sendFile(path.join(__dirname, "./db/db.json"))
 });
 
 //post request

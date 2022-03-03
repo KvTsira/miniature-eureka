@@ -2,6 +2,9 @@
 
 The application allows users to write and save notes. 
 
+# Installation
+Copy the code and run npm install to run it on the local machine.
+
 # Build with:
 * HTML
 * CSS
@@ -30,3 +33,15 @@ The application allows users to write and save notes.
 * THEN that note appears in the right-hand column
 * WHEN I click on the Write icon in the navigation at the top of the page
 * THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
+
+# Deployed Application
+
+https://whispering-basin-63747.herokuapp.com/
+
+
+
+# Project Demo
+
+[Note Taker Demo video](https://www.youtube.com/watch?v=3LaDqPq4_zE)
+
+

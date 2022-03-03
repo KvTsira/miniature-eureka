@@ -1,7 +1,7 @@
 //dependencies
 const express = require("express");
 const fs = require("fs");
-let { notes }  = require("./db/db.json");
+//let { notes }  = require("./db/db.json");
 const path = require("path");
 const uuid = require("uuid");
 const { validateNoteType, addNewNote } = require("./library/validate");
@@ -20,12 +20,14 @@ app.use(express.static("public"));
 app.get("/api/notes", (req, res) => {
     const data = fs.readFileSync("./db/db.json");
     res.json(JSON.parse(data));
+    
     //res.sendFile(path.join(__dirname, "/db/db.json"))
 });
 
 
 //post request
 app.post("/api/notes", (req, res) => {
+    const notes = JSON.parse(fs.readFileSync("db/db.json"));
     const newNote = {
         id: uuid.v4(),
         //id: notes.length + 1,
@@ -42,9 +44,9 @@ app.post("/api/notes", (req, res) => {
 
 //delete request
 app.delete("/api/notes/:id", (req, res) => {
-    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
-    const newNotes = notes.filter((removeNote) => removeNote.id !== req.params.id);
-    fs.writeFileSync("./db/db/json", JSON.stringify(newNotes));
+    const oldNotes = JSON.parse(fs.readFileSync("db/db.json"));
+    const newNotes = oldNotes.filter((removeNote) => removeNote.id !== req.params.id);
+    fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(newNotes));
     res.json(newNotes);
 });
 
